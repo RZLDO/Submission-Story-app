@@ -2,4 +2,15 @@
     <string name="app_name">StoryAppSubmission</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dicoding_academy_logo">Dicoding academy Logo</string>
+    <string name="loginimage">loginImage</string>
+    <string name="wellcome">Hi! Silahkan Login</string>
+    <string name="logintxt">Login</string>
+    <string name="doesn_t_have_account">doesn\'t have account?</string>
+    <string name="register_here">Register Here!</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="sign_up_here">Sign Up Here!</string>
+    <string name="name">Nama</string>
+    <string name="register">Register</string>
 </resources>
