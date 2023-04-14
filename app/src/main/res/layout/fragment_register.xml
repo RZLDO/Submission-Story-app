@@ -24,12 +24,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_signup"
         >
+        <ProgressBar
+            android:id="@+id/progress_bar_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:orientation="vertical"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +45,7 @@
                 android:textSize="24sp"
                 android:text="@string/sign_up_here"/>
             <com.example.storyappsubmission.utils.CustomEditText
-                android:id="@+id/edt_username"
+                android:id="@+id/ed_register_name"
                 android:layout_marginTop="10dp"
                 android:hint="@string/name"
                 android:layout_width="match_parent"
@@ -46,21 +53,23 @@
 
             <com.example.storyappsubmission.utils.CustomEditText
                 android:hint="@string/email"
-                android:id="@+id/edt_email"
+                android:id="@+id/ed_register_email"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <com.example.storyappsubmission.utils.CustomEditText
-                android:id="@+id/edt_password"
+                android:id="@+id/ed_register_password"
                 android:hint="@string/password"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:inputType="textPassword"
                 android:layout_height="wrap_content"/>
             <com.example.storyappsubmission.utils.CustomButton
                 android:id="@+id/btn_register"
                 android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:enabled="false"
                 android:text="@string/register"
            />
         </LinearLayout>

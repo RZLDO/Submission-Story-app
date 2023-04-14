@@ -13,4 +13,5 @@
     <string name="sign_up_here">Sign Up Here!</string>
     <string name="name">Nama</string>
     <string name="register">Register</string>
+    <string name="addcontent">addContent</string>
 </resources>
