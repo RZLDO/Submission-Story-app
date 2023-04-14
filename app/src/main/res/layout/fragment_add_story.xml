@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
+    tools:context=".presentation.addStory.AddStoryFragment">
+
+    <ImageView
+        android:id="@+id/iv_add_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/baseline_image_dark_24"/>
+    <LinearLayout
+        android:id="@+id/ll_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/iv_add_image">
+        <com.example.storyappsubmission.utils.CustomButton
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/camera"/>
+        <com.example.storyappsubmission.utils.CustomButton
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/galery"/>
+    </LinearLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_contentDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="@string/deskripsi"
+        android:layout_marginTop="20dp"
+        app:boxStrokeWidth="1dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ll_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="top"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.example.storyappsubmission.utils.CustomButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/upload"
+        app:layout_constraintTop_toBottomOf="@+id/tf_contentDesc"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

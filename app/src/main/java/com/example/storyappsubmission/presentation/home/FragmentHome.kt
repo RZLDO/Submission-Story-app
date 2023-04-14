@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.storyappsubmission.R
 import com.example.storyappsubmission.UserPreferencesViewModel
 import com.example.storyappsubmission.databinding.FragmentHomeBinding
@@ -25,6 +26,9 @@ class FragmentHome : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentHome_to_addStoryFragment)
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
