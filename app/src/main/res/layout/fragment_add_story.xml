@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
     tools:context=".presentation.addStory.AddStoryFragment">
-
     <ImageView
         android:id="@+id/iv_add_image"
         android:layout_width="200dp"
@@ -14,6 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/baseline_image_24"
         tools:src="@drawable/baseline_image_dark_24"/>
     <LinearLayout
         android:id="@+id/ll_button"
@@ -23,11 +23,13 @@
         android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@+id/iv_add_image">
         <com.example.storyappsubmission.utils.CustomButton
+            android:id="@+id/btn_camera"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginEnd="30dp"
             android:text="@string/camera"/>
         <com.example.storyappsubmission.utils.CustomButton
+            android:id="@+id/btn_galery"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="30dp"

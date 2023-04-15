@@ -23,6 +23,7 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentSplashScreenBinding.inflate(inflater,container, false)
         return binding.root
     }

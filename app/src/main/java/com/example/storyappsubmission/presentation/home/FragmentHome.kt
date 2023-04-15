@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FragmentHome : Fragment() {
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val userPreferencesViewModel : UserPreferencesViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
