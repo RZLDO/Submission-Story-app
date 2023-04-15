@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import android.Manifest.permission.CAMERA
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -19,7 +20,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.example.storyappsubmission.databinding.FragmentAddStoryBinding
 import com.example.storyappsubmission.utils.createCustomTempFile
+import com.example.storyappsubmission.utils.uriToFile
 import java.io.File
+import java.net.URI
 
 class AddStoryFragment : Fragment() {
     private var _binding : FragmentAddStoryBinding? = null
@@ -46,7 +49,31 @@ class AddStoryFragment : Fragment() {
                 startTakePhoto()
             }
         }
+
+        binding.btnGalery.setOnClickListener{
+            startGalery()
+        }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun startGalery() {
+        val intent = Intent()
+        intent.action = ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent,"Choose a picture")
+        launcherIntentGalery.launch(chooser)
+    }
+
+    private val launcherIntentGalery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+        if (it.resultCode == RESULT_OK){
+            val selectedImg : Uri = it.data?.data as Uri
+            selectedImg.let {Uri->
+                val myFile = uriToFile(Uri,requireContext())
+                binding.ivAddImage.setImageURI(Uri)
+            }
+        }
     }
 
     private fun startTakePhoto(){

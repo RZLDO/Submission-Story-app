@@ -1,11 +1,17 @@
 package com.example.storyappsubmission.utils
 
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Environment
+import android.renderscript.ScriptGroup.Input
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.util.Locale
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
@@ -45,4 +51,19 @@ fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean = false): Bitmap {
             true
         )
     }
+}
+
+fun uriToFile(selectedImg : Uri, context: Context):File{
+    val contentResolver : ContentResolver = context.contentResolver
+    val myFile = createCustomTempFile(context)
+
+    val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
+    val outputStream : OutputStream = FileOutputStream(myFile)
+    val buf = ByteArray(1024)
+    var len : Int
+    while (inputStream.read(buf).also { len = it }>0)outputStream.write(buf,0,len)
+    outputStream.close()
+    inputStream.close()
+
+    return myFile
 }
