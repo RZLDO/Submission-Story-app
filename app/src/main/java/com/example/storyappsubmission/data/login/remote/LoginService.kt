@@ -13,5 +13,5 @@ interface LoginService {
     fun userLogin(
         @Field("email")email: String,
         @Field("password")password : String
-    ) : Call<LoginResult?>
+    ) : Call<LoginResponse>
 }

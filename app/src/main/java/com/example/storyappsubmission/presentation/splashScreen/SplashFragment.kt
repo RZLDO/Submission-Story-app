@@ -3,6 +3,7 @@ package com.example.storyappsubmission.presentation.splashScreen
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,12 +32,14 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.hide()
-        val userpreferences = userPreferencesViewModel.loadUserData()
+        val userPreferences = userPreferencesViewModel.loadUserData()
         Handler(Looper.getMainLooper()).postDelayed({
-            if (userpreferences != null){
-                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-            }else{
+            if (userPreferences?.token != null){
+                Log.d("UserPreferencesCheck", userPreferences.toString())
                 findNavController().navigate(R.id.action_splashFragment_to_fragmentHome)
+            }else{
+
+                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
         },3000)
     }

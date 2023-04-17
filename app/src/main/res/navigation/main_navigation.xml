@@ -49,10 +49,23 @@
         <action
             android:id="@+id/action_fragmentHome_to_addStoryFragment"
             app:destination="@id/addStoryFragment" />
+        <action
+            android:id="@+id/action_fragmentHome_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addStoryFragment"
         android:name="com.example.storyappsubmission.presentation.addStory.AddStoryFragment"
         android:label="fragment_add_story"
         tools:layout="@layout/fragment_add_story" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.storyappsubmission.presentation.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="idUser"/>
+    </fragment>
 </navigation>

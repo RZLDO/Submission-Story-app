@@ -12,7 +12,6 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.Intent.ACTION_GET_CONTENT
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
@@ -21,12 +20,19 @@ import androidx.core.content.FileProvider
 import com.example.storyappsubmission.databinding.FragmentAddStoryBinding
 import com.example.storyappsubmission.utils.createCustomTempFile
 import com.example.storyappsubmission.utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.net.URI
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddStoryFragment : Fragment() {
     private var _binding : FragmentAddStoryBinding? = null
     private val binding get() = _binding!!
+    private val viewModel : AddStoryViewModel by viewModel()
+    private var getFile : File? = null
     companion object{
         private const val REQUEST_CAMERA_PERMISSION = 1
     }
@@ -53,7 +59,34 @@ class AddStoryFragment : Fragment() {
         binding.btnGalery.setOnClickListener{
             startGalery()
         }
+        binding.btnAddStory.setOnClickListener{
+           if (getFile != null){
+               addStory()
+           }else{
+               Toast.makeText(requireContext(), "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
+           }
+        }
+
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun addStory() {
+        val description = binding.tfContentDesc.editText?.text.toString().toRequestBody("text/plain".toMediaType())
+        val file = getFile as File
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart : MultipartBody.Part = MultipartBody.Part.createFormData(
+            "photo",
+            file.name,
+            requestImageFile
+        )
+        viewModel.addStoryResult.observe(viewLifecycleOwner){
+
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner){
+
+        }
+        viewModel.addStory(imageMultipart, description)
+
     }
 
     private fun startGalery() {
@@ -71,6 +104,7 @@ class AddStoryFragment : Fragment() {
             val selectedImg : Uri = it.data?.data as Uri
             selectedImg.let {Uri->
                 val myFile = uriToFile(Uri,requireContext())
+                getFile = myFile
                 binding.ivAddImage.setImageURI(Uri)
             }
         }
@@ -99,7 +133,7 @@ class AddStoryFragment : Fragment() {
         if (it.resultCode == RESULT_OK){
             val myFile = File(currentPhotoPath)
             val result = BitmapFactory.decodeFile(myFile.path)
-
+            getFile = myFile
             binding.ivAddImage.setImageBitmap(result)
         }
 

@@ -3,6 +3,7 @@ package com.example.storyappsubmission.presentation.login
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.storyappsubmission.R
 import com.example.storyappsubmission.UserPreferencesViewModel
 import com.example.storyappsubmission.data.local.UserModel
-import com.example.storyappsubmission.data.login.model.LoginResponse
 import com.example.storyappsubmission.data.login.model.LoginResult
 import com.example.storyappsubmission.databinding.FragmentLoginBinding
-import com.example.storyappsubmission.di.viewModelModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginFragment : Fragment() {
     private var _binding : FragmentLoginBinding? = null
@@ -51,9 +50,10 @@ class LoginFragment : Fragment() {
         if (loginResult == null){
             Toast.makeText(context, "User Not Found", Toast.LENGTH_SHORT).show()
         }else {
-            findNavController().navigate(R.id.action_loginFragment_to_fragmentHome)
             val userModel = UserModel(loginResult.userId, loginResult.name, loginResult.token)
             userViewModel.saveUserData(userModel)
+            
+            findNavController().navigate(R.id.action_loginFragment_to_fragmentHome)
         }
     }
     private fun isLoading(it: Boolean) {

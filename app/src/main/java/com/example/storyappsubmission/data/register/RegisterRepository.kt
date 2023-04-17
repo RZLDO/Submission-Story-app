@@ -1,6 +1,5 @@
 package com.example.storyappsubmission.data.register
 
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

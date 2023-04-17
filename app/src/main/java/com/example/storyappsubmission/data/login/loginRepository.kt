@@ -3,6 +3,7 @@ package com.example.storyappsubmission.data.login
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.storyappsubmission.data.login.model.LoginResponse
 import com.example.storyappsubmission.data.login.model.LoginResult
 import com.example.storyappsubmission.data.login.remote.LoginService
 import retrofit2.Call
@@ -14,23 +15,23 @@ class LoginRepository(private val loginService: LoginService) {
     val isLoading : LiveData<Boolean>
         get() = _isLoading
 
-     fun userLogin(email:String, password:String):LiveData<LoginResult?>{
+     fun userLogin(email:String, password:String):LiveData<LoginResult>{
         _isLoading.value = true
         val liveData = MutableLiveData<LoginResult>()
-        loginService.userLogin(email,password).enqueue(object : Callback<LoginResult?>{
-            override fun onResponse(call: Call<LoginResult?>, response: Response<LoginResult?>) {
+        loginService.userLogin(email,password).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful){
                     _isLoading.value = false
                     Log.d("loginRepository", response.body().toString())
-                    liveData.value = response.body()
+                    liveData.value = response.body()?.loginResult
+                }else{
+                    Log.d("loginRepository","onFailure : ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<LoginResult?>, t: Throwable) {
-                _isLoading.value = false
-                Log.d("loginRepository", t.toString())
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Log.d("loginRepository","onFailure : ${t.message}")
             }
-
         })
         return liveData
     }

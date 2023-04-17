@@ -1,8 +1,12 @@
 package com.example.storyappsubmission.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.util.Log
+import com.example.storyappsubmission.data.local.UserPreferences.Companion.USER_TOKEN
 import com.example.storyappsubmission.data.login.remote.LoginService
 import com.example.storyappsubmission.data.register.remote.RegisterService
+import com.example.storyappsubmission.data.story.remote.StoryService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -18,6 +22,15 @@ val networkModule = module {
     single {
         OkHttpClient().newBuilder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder()
+                val token = get<SharedPreferences>().getString(USER_TOKEN,"")
+                Log.d("cekTokenInRetrofit", "$token")
+                if (!token.isNullOrEmpty()){
+                    requestBuilder.addHeader("Authorization", "Bearer $token")
+                }
+                chain.proceed(requestBuilder.build())
+            }
             .build()
     }
 
@@ -31,6 +44,7 @@ val networkModule = module {
 
     single { provideLoginService(get()) }
     single { provideRegisterService(get()) }
+    single { provideStoryService(get()) }
 }
 
 fun provideLoginService(retrofit: Retrofit): LoginService =
@@ -38,3 +52,6 @@ fun provideLoginService(retrofit: Retrofit): LoginService =
 
 fun provideRegisterService(retrofit: Retrofit): RegisterService =
     retrofit.create(RegisterService::class.java)
+
+fun provideStoryService(retrofit: Retrofit): StoryService =
+    retrofit.create(StoryService::class.java)

@@ -2,6 +2,7 @@ package com.example.storyappsubmission.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 
 class UserPreferences(private val sharedPreferences: SharedPreferences) {
@@ -15,7 +16,7 @@ class UserPreferences(private val sharedPreferences: SharedPreferences) {
         sharedPreferences.edit{
             putString(USER_ID, userModel.userId)
             putString(USER_NAME, userModel.name)
-            putString(USER_NAME, userModel.token)
+            putString(USER_TOKEN, userModel.token)
         }
     }
 
@@ -24,7 +25,8 @@ class UserPreferences(private val sharedPreferences: SharedPreferences) {
         val name = sharedPreferences.getString(USER_NAME, null)
         val token = sharedPreferences.getString(USER_TOKEN, null)
         return if (userId != null && name != null && token != null){
-            UserModel(userId,name, token)
+            UserModel(userId,name,token)
+
         }else{
             null
         }
