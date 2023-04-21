@@ -60,7 +60,7 @@
         <action
             android:id="@+id/action_fragmentHome_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/fragmentHome"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
@@ -71,7 +71,7 @@
         <action
             android:id="@+id/action_addStoryFragment_to_fragmentHome"
             app:destination="@id/fragmentHome"
-            app:popUpTo="@id/splashFragment"
+            app:popUpTo="@id/addStoryFragment"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
