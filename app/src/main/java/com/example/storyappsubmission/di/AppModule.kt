@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 const val base_url = "https://story-api.dicoding.dev/v1/"
 
 val sharePreferencesModule = module {
-    single { get<Context>().getSharedPreferences("user_preferences",Context.MODE_PRIVATE) }
+    single { get<Context>().getSharedPreferences("sdasd",Context.MODE_PRIVATE) }
 }
 val networkModule = module {
     single {

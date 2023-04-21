@@ -3,9 +3,14 @@ package com.example.storyappsubmission.presentation.detail
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedDispatcher
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.storyappsubmission.R
 import com.example.storyappsubmission.data.story.model.Story
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.example.storyappsubmission.databinding.FragmentDetailBinding
@@ -24,9 +29,13 @@ class DetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.toolbarDetail.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         fetchData()
         super.onViewCreated(view, savedInstanceState)
     }
+
 
     private fun fetchData() {
         val id = DetailFragmentArgs.fromBundle(arguments as Bundle).id
@@ -40,7 +49,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun isLoading(it: Boolean) {
-
+        binding.proggresBarDetail.visibility = if (it) View.VISIBLE else View.GONE
     }
 
     private fun setData(it: Story) {

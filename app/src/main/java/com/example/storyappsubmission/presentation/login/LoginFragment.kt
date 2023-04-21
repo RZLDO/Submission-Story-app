@@ -38,7 +38,9 @@ class LoginFragment : Fragment() {
             viewModel.userLogin(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString())
         }
         viewModel.loginResult.observe(viewLifecycleOwner){
-            setLoginState(it)
+            if (it != null){
+                setLoginState(it)
+            }
         }
         viewModel.isLoading.observe(viewLifecycleOwner){
             isLoading(it)
@@ -46,18 +48,16 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun setLoginState(loginResult : LoginResult?){
-        if (loginResult == null){
-            Toast.makeText(context, "User Not Found", Toast.LENGTH_SHORT).show()
-        }else {
-            val userModel = UserModel(loginResult.userId, loginResult.name, loginResult.token)
-            userViewModel.saveUserData(userModel)
-            
-            findNavController().navigate(R.id.action_loginFragment_to_fragmentHome)
-        }
+    private fun setLoginState(loginResult : LoginResult){
+        val userModel = UserModel(loginResult.userId, loginResult.name, loginResult.token)
+        userViewModel.saveUserData(userModel)
+        Toast.makeText(requireContext(), "Welcome ${userModel.name}", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_loginFragment_to_fragmentHome)
+
     }
     private fun isLoading(it: Boolean) {
-        binding.progressBar.visibility = if (it) View.GONE else View.VISIBLE
+        binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+        binding.btnLogin.isEnabled = !it
     }
 
     private fun setEnable() {
@@ -109,7 +109,7 @@ class LoginFragment : Fragment() {
         val email = binding.edLoginEmail.text
         val password = binding.edLoginPassword.text
 
-        binding.btnLogin.isEnabled = email != null && password !=null
+        binding.btnLogin.isEnabled = !email.isNullOrEmpty() && !password.isNullOrEmpty()
     }
 
     override fun onDestroy() {

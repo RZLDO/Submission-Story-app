@@ -20,8 +20,8 @@ class LoginRepository(private val loginService: LoginService) {
         val liveData = MutableLiveData<LoginResult>()
         loginService.userLogin(email,password).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                _isLoading.value = false
                 if (response.isSuccessful){
-                    _isLoading.value = false
                     Log.d("loginRepository", response.body().toString())
                     liveData.value = response.body()?.loginResult
                 }else{
@@ -30,6 +30,7 @@ class LoginRepository(private val loginService: LoginService) {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                _isLoading.value = false
                 Log.d("loginRepository","onFailure : ${t.message}")
             }
         })

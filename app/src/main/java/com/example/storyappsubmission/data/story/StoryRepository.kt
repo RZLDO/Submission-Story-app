@@ -78,6 +78,7 @@ class StoryRepository (private val storyService: StoryService){
                 call: Call<DetailStoryResponse>,
                 response: Response<DetailStoryResponse>
             ) {
+                _isLoading.value = false
                 if (response.isSuccessful){
                     Log.d("getDetailStory", response.body().toString())
                     liveData.value = response.body()?.story
@@ -85,6 +86,7 @@ class StoryRepository (private val storyService: StoryService){
             }
 
             override fun onFailure(call: Call<DetailStoryResponse>, t: Throwable) {
+                _isLoading.value = false
                 Log.d("getDetailStory", t.message.toString())
             }
         })

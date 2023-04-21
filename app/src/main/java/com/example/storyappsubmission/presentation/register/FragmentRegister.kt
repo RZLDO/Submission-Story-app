@@ -130,7 +130,7 @@ class FragmentRegister : Fragment() {
         val email = binding.edRegisterEmail.text
         val password = binding.edRegisterPassword.text
         binding.btnRegister.isEnabled =
-            name!=null && name.toString().isNotEmpty() && email!=null && email.toString().isNotEmpty() && password != null && password.toString().isNotEmpty()
+            !name.isNullOrEmpty() && !email.isNullOrEmpty() && !password.isNullOrEmpty()
     }
 
 

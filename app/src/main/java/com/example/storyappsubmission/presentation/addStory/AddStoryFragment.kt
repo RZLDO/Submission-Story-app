@@ -15,7 +15,9 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.example.storyappsubmission.databinding.FragmentAddStoryBinding
 import com.example.storyappsubmission.utils.createCustomTempFile
@@ -79,14 +81,19 @@ class AddStoryFragment : Fragment() {
             file.name,
             requestImageFile
         )
+        (activity as AppCompatActivity).supportActionBar?.title = "Detail Story"
         viewModel.addStoryResult.observe(viewLifecycleOwner){
 
         }
         viewModel.isLoading.observe(viewLifecycleOwner){
-
+            isLoading(it)
         }
         viewModel.addStory(imageMultipart, description)
 
+    }
+
+    private fun isLoading(it: Boolean) {
+        binding.progressBarAdd.visibility = if (it) View.VISIBLE else View.GONE
     }
 
     private fun startGalery() {

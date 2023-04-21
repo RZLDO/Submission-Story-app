@@ -18,4 +18,5 @@
     <string name="galery">Galery</string>
     <string name="deskripsi">deskripsi</string>
     <string name="upload">upload</string>
+    <string name="logout">Logout</string>
 </resources>

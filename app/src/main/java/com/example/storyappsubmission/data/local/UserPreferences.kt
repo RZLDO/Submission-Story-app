@@ -1,8 +1,7 @@
 package com.example.storyappsubmission.data.local
 
-import android.content.Context
+
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.core.content.edit
 
 class UserPreferences(private val sharedPreferences: SharedPreferences) {
