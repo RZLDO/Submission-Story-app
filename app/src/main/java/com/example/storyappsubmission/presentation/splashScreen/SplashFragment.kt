@@ -38,7 +38,6 @@ class SplashFragment : Fragment() {
                 Log.d("UserPreferencesCheck", userPreferences.toString())
                 findNavController().navigate(R.id.action_splashFragment_to_fragmentHome)
             }else{
-
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
             }
         },3000)

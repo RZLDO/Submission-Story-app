@@ -12,10 +12,15 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
+            />
         <action
             android:id="@+id/action_splashFragment_to_fragmentHome"
-            app:destination="@id/fragmentHome" />
+            app:destination="@id/fragmentHome"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -55,14 +60,20 @@
         <action
             android:id="@+id/action_fragmentHome_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/fragmentHome"
+            app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/addStoryFragment"
         android:name="com.example.storyappsubmission.presentation.addStory.AddStoryFragment"
         android:label="fragment_add_story"
-        tools:layout="@layout/fragment_add_story" />
+        tools:layout="@layout/fragment_add_story" >
+        <action
+            android:id="@+id/action_addStoryFragment_to_fragmentHome"
+            app:destination="@id/fragmentHome"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.storyappsubmission.presentation.detail.DetailFragment"

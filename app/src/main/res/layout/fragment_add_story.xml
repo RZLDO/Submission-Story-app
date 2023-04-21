@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.addStory.AddStoryFragment">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_detail"
+        android:id="@+id/toolbar_add_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/mainColor"
@@ -20,7 +20,7 @@
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_detail"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_story"
         android:src="@drawable/baseline_image_24"
         tools:src="@drawable/baseline_image_dark_24"/>
     <LinearLayout
@@ -78,6 +78,7 @@
         android:id="@+id/progress_bar_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

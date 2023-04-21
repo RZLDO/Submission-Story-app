@@ -15,10 +15,13 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
-import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.navigation.fragment.findNavController
+import com.example.storyappsubmission.R
+import com.example.storyappsubmission.data.story.model.StoryResponse
 import com.example.storyappsubmission.databinding.FragmentAddStoryBinding
 import com.example.storyappsubmission.utils.createCustomTempFile
 import com.example.storyappsubmission.utils.uriToFile
@@ -38,7 +41,6 @@ class AddStoryFragment : Fragment() {
     companion object{
         private const val REQUEST_CAMERA_PERMISSION = 1
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +70,9 @@ class AddStoryFragment : Fragment() {
                Toast.makeText(requireContext(), "Silakan masukkan berkas gambar terlebih dahulu.", Toast.LENGTH_SHORT).show()
            }
         }
-
+        binding.toolbarAddStory.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -83,13 +87,25 @@ class AddStoryFragment : Fragment() {
         )
         (activity as AppCompatActivity).supportActionBar?.title = "Detail Story"
         viewModel.addStoryResult.observe(viewLifecycleOwner){
-
+            setStateAdd(it)
         }
         viewModel.isLoading.observe(viewLifecycleOwner){
             isLoading(it)
         }
         viewModel.addStory(imageMultipart, description)
 
+    }
+    private fun setStateAdd(storyResponse: StoryResponse) {
+        val builder : AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Message")
+        builder.setMessage("Story mu berhasil di upload")
+        builder.setPositiveButton("OK"){ dialog, _ ->
+            findNavController().navigate(R.id.action_addStoryFragment_to_fragmentHome)
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
+        val dialog : AlertDialog = builder.create()
+        dialog.show()
     }
 
     private fun isLoading(it: Boolean) {

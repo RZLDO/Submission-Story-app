@@ -23,12 +23,10 @@ class StoryRepository (private val storyService: StoryService){
     fun addStory(imageData : MultipartBody.Part, description:RequestBody):LiveData<StoryResponse>{
         _isLoading.value = true
         val liveData = MutableLiveData<StoryResponse>()
-
         storyService.addStory(imageData, description).enqueue(object: Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
                 _isLoading.value = false
                 if (response.isSuccessful && response.body() != null ){
-                    Log.d("AddStory", response.body().toString())
                     liveData.value = response.body()
                 }else{
                     Log.d("AddStory", response.message())
