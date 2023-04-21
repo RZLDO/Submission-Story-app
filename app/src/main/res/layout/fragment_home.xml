@@ -13,8 +13,7 @@
         app:title="Story Kamu"
         app:titleTextColor="@color/white"
         app:menu="@menu/main_menu"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/baseline_back_24"/>
+        app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"

@@ -112,6 +112,8 @@ class LoginFragment : Fragment() {
         binding.btnLogin.isEnabled = !email.isNullOrEmpty() && !password.isNullOrEmpty()
     }
 
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
