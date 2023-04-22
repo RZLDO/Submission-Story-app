@@ -1,5 +1,7 @@
 package com.example.storyappsubmission.presentation.login
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,6 +32,7 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        playAnimation()
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_fragmentRegister)
         }
@@ -46,6 +49,31 @@ class LoginFragment : Fragment() {
             isLoading(it)
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.loginImage, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val cardView = ObjectAnimator.ofFloat(binding.cardViewLogin,View.ALPHA, 1f).setDuration(500)
+        val loginText = ObjectAnimator.ofFloat(binding.wellcome,View.ALPHA, 1f).setDuration(500)
+        val edtEmail = ObjectAnimator.ofFloat(binding.edLoginEmail,View.ALPHA, 1f).setDuration(500)
+        val edtPassword = ObjectAnimator.ofFloat(binding.edLoginPassword,View.ALPHA, 1f).setDuration(500)
+        val btnLogin = ObjectAnimator.ofFloat(binding.btnLogin,View.ALPHA, 1f).setDuration(500)
+        val tvAccount = ObjectAnimator.ofFloat(binding.account,View.ALPHA, 1f).setDuration(500)
+        val toRegist = ObjectAnimator.ofFloat(binding.tvRegister,View.ALPHA, 1f).setDuration(500)
+
+        val together = AnimatorSet().apply {
+            playTogether(tvAccount, toRegist)
+        }
+        
+        AnimatorSet().apply { 
+            playSequentially(cardView, loginText,edtEmail,edtPassword,btnLogin,together)
+            start()
+        }
     }
 
     private fun setLoginState(loginResult : LoginResult){

@@ -18,12 +18,14 @@
         android:contentDescription="@string/loginimage" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginImage"
         android:layout_marginHorizontal="24dp"
+        android:alpha="0"
         >
         <ProgressBar
             android:id="@+id/progressBar"
@@ -46,7 +48,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:textSize="20sp"
                 android:textColor="@color/mainColor"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:alpha="0"
+                />
 
             <com.example.storyappsubmission.utils.CustomEditText
                 android:id="@+id/ed_login_email"
@@ -56,6 +60,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wellcome"
+                android:alpha="0"
                 />
             <com.example.storyappsubmission.utils.CustomEditText
                 android:id="@+id/ed_login_password"
@@ -65,6 +70,7 @@
                 android:hint="@string/password"
                 app:layout_constraintStart_toStartOf="parent"
                 android:inputType="textPassword"
+                android:alpha="0"
                 app:layout_constraintTop_toBottomOf="@+id/ed_login_email"/>
 
             <com.example.storyappsubmission.utils.CustomButton
@@ -75,6 +81,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:enabled="false"
+                android:alpha="0"
                 app:layout_constraintTop_toBottomOf="@+id/ed_login_password"
                 android:text="@string/logintxt"/>
 
@@ -92,6 +99,7 @@
                    android:id="@+id/account"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:alpha="0"
                    android:text="@string/doesn_t_have_account"/>
                <TextView
                    android:id="@+id/tv_register"
@@ -102,6 +110,7 @@
                    android:textColor="@color/mainColor"
                    android:layout_marginStart="5dp"
                    android:clickable="true"
+                   android:alpha="0"
                    android:focusable="true" />
            </LinearLayout>
 

@@ -31,6 +31,7 @@ class FragmentRegister : Fragment() {
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        playAnimation()
         enableRegisterButton()
         val name = binding.edRegisterName.text
         val email = binding.edRegisterEmail.text
@@ -53,6 +54,10 @@ class FragmentRegister : Fragment() {
 
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun playAnimation() {
+
     }
 
     private fun isLoading(it: Boolean) {
