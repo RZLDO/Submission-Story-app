@@ -24,6 +24,7 @@ import com.example.storyappsubmission.R
 import com.example.storyappsubmission.data.story.model.StoryResponse
 import com.example.storyappsubmission.databinding.FragmentAddStoryBinding
 import com.example.storyappsubmission.utils.createCustomTempFile
+import com.example.storyappsubmission.utils.reduceFileImage
 import com.example.storyappsubmission.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -78,7 +79,7 @@ class AddStoryFragment : Fragment() {
 
     private fun addStory() {
         val description = binding.tfContentDesc.editText?.text.toString().toRequestBody("text/plain".toMediaType())
-        val file = getFile as File
+        val file = reduceFileImage(getFile as File)
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageMultipart : MultipartBody.Part = MultipartBody.Part.createFormData(
             "photo",
