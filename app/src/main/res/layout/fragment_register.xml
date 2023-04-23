@@ -4,9 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="24dp"
     tools:context=".presentation.register.FragmentRegister">
-
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:title=""
+        app:titleTextColor="@color/white"
+        app:menu="@menu/main_menu"
+        app:navigationIcon="@drawable/baseline_back_black_24"
+        app:navigationIconTint="@color/mainColor"
+        app:layout_constraintTop_toTopOf="parent"/>
     <ImageView
         android:id="@+id/iv_signup"
         android:layout_width="200dp"
@@ -18,11 +27,15 @@
         android:layout_marginTop="50dp"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_signup"
+        android:alpha="0"
+        android:layout_margin="16dp"
+
         >
         <ProgressBar
             android:id="@+id/progress_bar_register"
@@ -33,35 +46,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:padding="24dp"
             android:orientation="vertical"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_register_here"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/mainColor"
                 android:textStyle="bold"
                 android:textSize="24sp"
+                android:alpha="0"
                 android:text="@string/sign_up_here"/>
-            <com.example.storyappsubmission.utils.CustomEditText
+            <com.example.storyappsubmission.utils.CustomBasicEditText
                 android:id="@+id/ed_register_name"
                 android:layout_marginTop="10dp"
                 android:hint="@string/name"
                 android:layout_width="match_parent"
+                android:alpha="0"
                 android:layout_height="wrap_content"/>
 
             <com.example.storyappsubmission.utils.CustomEditText
                 android:hint="@string/email"
                 android:id="@+id/ed_register_email"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <com.example.storyappsubmission.utils.CustomEditText
+            <com.example.storyappsubmission.utils.CustomPasswordEditText
                 android:id="@+id/ed_register_password"
                 android:hint="@string/password"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:alpha="0"
                 android:inputType="textPassword"
                 android:layout_height="wrap_content"/>
             <com.example.storyappsubmission.utils.CustomButton
@@ -69,6 +87,7 @@
                 android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
+                android:alpha="0"
                 android:enabled="false"
                 android:text="@string/register"
            />

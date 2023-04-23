@@ -33,10 +33,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         playAnimation()
+        enableButton()
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_fragmentRegister)
         }
-        setEnable()
         binding.btnLogin.setOnClickListener {
             viewModel.userLogin(binding.edLoginEmail.text.toString(), binding.edLoginPassword.text.toString())
         }
@@ -50,7 +50,40 @@ class LoginFragment : Fragment() {
         }
         super.onViewCreated(view, savedInstanceState)
     }
+    private fun enableButton(){
+        binding.edLoginEmail.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (binding.edLoginEmail.error == null ){
+                    isEnable()
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+        binding.edLoginPassword.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (binding.edLoginPassword.error == null){
+                    isEnable()
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+    }
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.loginImage, View.TRANSLATION_X, -30f, 30f).apply {
             duration = 6000
@@ -87,61 +120,12 @@ class LoginFragment : Fragment() {
         binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         binding.btnLogin.isEnabled = !it
     }
-
-    private fun setEnable() {
-        binding.edLoginEmail.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                when{
-                    p0.isNullOrEmpty() -> binding.edLoginEmail.error = "Email Tidak Boleh Kosong"
-                    !android.util.Patterns.EMAIL_ADDRESS.matcher(p0).matches() -> binding.edLoginEmail.error = "Email tidak valid"
-                    else->{
-                        binding.edLoginEmail.error = null
-                        isEnable()
-                    }
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-        binding.edLoginPassword.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                when{
-                    p0.isNullOrEmpty() -> binding.edLoginPassword.error = "Password tidak boleh kosong"
-                    p0.length < 8 -> binding.edLoginPassword.error = "password minimal 8 karakter"
-                    else -> {
-                        binding.edLoginPassword.error = null
-                        isEnable()
-                    }
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-    }
-
     private fun isEnable(){
         val email = binding.edLoginEmail.text
         val password = binding.edLoginPassword.text
 
         binding.btnLogin.isEnabled = !email.isNullOrEmpty() && !password.isNullOrEmpty()
     }
-
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

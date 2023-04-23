@@ -4,19 +4,19 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dicoding_academy_logo">Dicoding academy Logo</string>
     <string name="loginimage">loginImage</string>
-    <string name="wellcome">Hi! Silahkan Login</string>
+    <string name="wellcome">Hi! Please Login</string>
     <string name="logintxt">Login</string>
     <string name="doesn_t_have_account">doesn\'t have account?</string>
     <string name="register_here">Register Here!</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="sign_up_here">Sign Up Here!</string>
-    <string name="name">Nama</string>
+    <string name="name">Name</string>
     <string name="register">Register</string>
     <string name="addcontent">addContent</string>
     <string name="camera">Camera</string>
-    <string name="galery">Galery</string>
-    <string name="deskripsi">deskripsi</string>
+    <string name="galery">Gallery</string>
+    <string name="deskripsi">description</string>
     <string name="upload">upload</string>
     <string name="logout">Logout</string>
 </resources>

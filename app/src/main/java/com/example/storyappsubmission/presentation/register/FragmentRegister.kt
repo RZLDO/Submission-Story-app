@@ -1,5 +1,8 @@
 package com.example.storyappsubmission.presentation.register
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.opengl.Visibility
 import android.os.Bundle
@@ -52,12 +55,31 @@ class FragmentRegister : Fragment() {
             }
         }
 
+        binding.toolbarRegister.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
         super.onViewCreated(view, savedInstanceState)
     }
 
     private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.ivSignup, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+        val cardView = ObjectAnimator.ofFloat(binding.cardviewRegister,View.ALPHA, 1f).setDuration(500)
+        val registerText = ObjectAnimator.ofFloat(binding.tvRegisterHere, View.ALPHA, 1f).setDuration(500)
+        val edEmail = ObjectAnimator.ofFloat(binding.edRegisterEmail, View.ALPHA, 1f).setDuration(500)
+        val edName = ObjectAnimator.ofFloat(binding.edRegisterName, View.ALPHA, 1f).setDuration(500)
+        val edPassword= ObjectAnimator.ofFloat(binding.edRegisterPassword, View.ALPHA, 1f).setDuration(500)
+        val btnRegister = ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(500)
 
+        AnimatorSet().apply {
+            playSequentially(cardView,registerText,edName,edEmail,edPassword, btnRegister)
+            start()
+        }
     }
 
     private fun isLoading(it: Boolean) {
@@ -71,13 +93,9 @@ class FragmentRegister : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                when{
-                    p0.isNullOrEmpty() -> binding.edRegisterName.error = "Nama Tidak Boleh Kosong"
-                    else -> {
-                        binding.edRegisterName.error = null
-                        isEnable()
-                    }
-                }
+               if (binding.edRegisterName.error == null ){
+                   isEnable()
+               }
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -92,13 +110,8 @@ class FragmentRegister : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                when{
-                    p0.isNullOrEmpty() -> binding.edRegisterEmail.error = "Email tidak boleh kosong"
-                    !android.util.Patterns.EMAIL_ADDRESS.matcher(p0).matches() -> binding.edRegisterEmail.error = "Email tidak Valid"
-                    else -> {
-                        binding.edRegisterEmail.error = null
-                        isEnable()
-                    }
+                if (binding.edRegisterEmail.error == null ){
+                    isEnable()
                 }
             }
 
@@ -113,13 +126,8 @@ class FragmentRegister : Fragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                when{
-                    p0.isNullOrEmpty() -> binding.edRegisterPassword.error = "Password Tidak Boleh kosong"
-                    p0.length < 8 -> binding.edRegisterPassword.error = "password minimal 8 karakter"
-                    else ->{
-                        binding.edRegisterPassword.error = null
-                        isEnable()
-                    }
+                if (binding.edRegisterPassword.error == null ){
+                    isEnable()
                 }
             }
 
@@ -129,14 +137,11 @@ class FragmentRegister : Fragment() {
 
         })
     }
-
-    private fun isEnable() {
+    fun isEnable() {
         val name = binding.edRegisterName.text
         val email = binding.edRegisterEmail.text
         val password = binding.edRegisterPassword.text
         binding.btnRegister.isEnabled =
             !name.isNullOrEmpty() && !email.isNullOrEmpty() && !password.isNullOrEmpty()
     }
-
-
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">StoryAppSubmission</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+    <string name="dicoding_academy_logo">Logo akademi Dicoding</string>
+    <string name="loginimage">Gambar login</string>
+    <string name="wellcome">Hai! Silakan login</string>
+    <string name="logintxt">Masuk</string>
+    <string name="doesn_t_have_account">Belum punya akun?</string>
+    <string name="register_here">Daftar disini!</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="sign_up_here">Daftar disini!</string>
+    <string name="name">Nama</string>
+    <string name="register">Daftar</string>
+    <string name="addcontent">Tambahkan konten</string>
+    <string name="camera">Kamera</string>
+    <string name="galery">Galeri</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="upload">Unggah</string>
+    <string name="logout">Keluar</string>
+</resources>
